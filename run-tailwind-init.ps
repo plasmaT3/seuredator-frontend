@@ -1,0 +1,20 @@
+try {
+    Write-Output "Obtendo prefixo global do npm..."
+    $npmPrefix = npm prefix -g
+    if (-not $npmPrefix) {
+        throw "Não foi possível obter o prefixo global do npm."
+    }
+
+    $tailwindPath = Join-Path $npmPrefix "node_modules\.bin\tailwindcss.cmd"
+    Write-Output "Tentando executar tailwindcss em: $tailwindPath"
+
+    if (Test-Path $tailwindPath) {
+        & $tailwindPath init -p
+        Write-Output "Configuração do Tailwind CSS criada com sucesso."
+    } else {
+        throw "Executável tailwindcss não encontrado no caminho esperado."
+    }
+} catch {
+    Write-Error "Erro ao executar tailwindcss: $_"
+    Write-Output "Tente rodar manualmente ou verifique sua instalação do npm e do tailwindcss."
+}
