@@ -1,3 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Você pode adicionar CSS customizado abaixo se quiser */
+
 :root {
   --primary-red: #cc0000;
   --white: #fff;
