@@ -6,7 +6,7 @@ const NewsSection = ({ category, title }) => {
   useEffect(() => {
     fetch(`http://localhost:5000/noticias/${category}`)
       .then((res) => res.json())
-      .then((data) => setNews(data))
+      .then((data) => setNews(data.noticias)) // ✅ pega só o array
       .catch((err) => console.error(err));
   }, [category]);
 
@@ -16,15 +16,17 @@ const NewsSection = ({ category, title }) => {
       <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
         {news.map((item, index) => (
           <div key={index} className="news-card min-h-[400px]">
-            {item.image && (
-              <img src={item.image} alt={item.title} className="w-full h-48 object-cover" />
-            )}
+            <img
+              src={item.image_url || "/img/placeholder.jpg"}
+              alt={item.title}
+              className="w-full h-48 object-cover"
+            />
             <div className="content">
               <h3 className="title">{item.title}</h3>
               <p className="summary">
                 {item.summary?.slice(0, 200).replace(/<[^>]+>/g, "").trim()}...
               </p>
-              <a href={item.url} target="_blank" rel="noopener noreferrer">
+              <a href={item.link} target="_blank" rel="noopener noreferrer">
                 Ler mais &rarr;
               </a>
             </div>

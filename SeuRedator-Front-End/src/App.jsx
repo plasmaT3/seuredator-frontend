@@ -1,16 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-import NavMenu from "./components/NavMenu";
-import InfoTicker from "./components/InfoTicker";
+import Header from "./components/Header";
 import NewsSection from "./components/NewsSection";
 import CategoryPage from "./components/CategoryPage";
 
 const App = () => {
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
-      <header>
-        <NavMenu />
-        <InfoTicker />
-      </header>
+      <Header />
       <main className="p-4 space-y-8">
         <Routes>
           <Route
@@ -28,6 +24,7 @@ const App = () => {
               </>
             }
           />
+          {/* 🛠️ Aqui estava o problema: era :category em vez de :categoria */}
           <Route path="/categoria/:categoria" element={<CategoryPage />} />
         </Routes>
       </main>
